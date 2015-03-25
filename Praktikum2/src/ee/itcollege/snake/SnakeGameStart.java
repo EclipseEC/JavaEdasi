@@ -60,6 +60,10 @@ public class SnakeGameStart implements Runnable {
 				case KeyEvent.VK_ESCAPE:
 					System.exit(0);
 					break;
+				case KeyEvent.VK_S:/*
+					ObjectOutputStream saver = new ObjectOutputStream(
+							new FileOutputStream(new File("gamedata.dat")));
+						saver.writeObject(obj);*/
 				}
 				if (null != direction) {
 					snake.setDirection(direction);
