@@ -18,7 +18,6 @@ import ee.itcollege.snake.lib.CollisionDetector;
 public class GameField extends JApplet {
 
 	private Snake snake = new Snake();
-	private Apple apple = null;
 	private Image buffer;
 	private ArrayList<Apple> apples = new ArrayList<Apple>();
 
@@ -60,6 +59,10 @@ public class GameField extends JApplet {
 	}
 
 	public void checkCollisions() {
+		if (snake.collideWithItself()) {
+			System.exit(0);
+		}
+		
 		for (int i = 0; i < apples.size(); i++) {
 			if (CollisionDetector.collide(
 					snake.getHead(), apples.get(i))) {

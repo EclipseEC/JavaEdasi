@@ -3,6 +3,7 @@ package ee.itcollege.snake.parts;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import ee.itcollege.snake.lib.CollisionDetector;
 import ee.itcollege.snake.lib.Direction;
 import ee.itcollege.snake.lib.IEdible;
 
@@ -65,7 +66,7 @@ public class Snake {
 	public Direction getDirection() {
 		return direction;
 	}
-	
+
 	public void eat(IEdible food) {
 		for (int i = 0; i < food.getCalories(); i++) {
 			parts.add(new SnakePart(-100, -100));
@@ -76,6 +77,16 @@ public class Snake {
 		if (this.directionOrder == null) {
 			this.directionOrder = direction;
 		}
+	}
+
+	public boolean collideWithItself() {
+		SnakePart head = getHead();
+		for (int i = 4; i < parts.size(); i++) {
+			if (CollisionDetector.collide(head, parts.get(i))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

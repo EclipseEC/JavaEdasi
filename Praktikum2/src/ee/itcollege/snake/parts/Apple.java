@@ -36,7 +36,7 @@ public class Apple implements IDrawable, IEdible {
 
 	@Override
 	public int getCalories() {
-		return 10;
+		return 2;
 	}
 
 }
