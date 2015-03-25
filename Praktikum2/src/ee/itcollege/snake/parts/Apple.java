@@ -14,8 +14,13 @@ public class Apple implements IDrawable {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final int APPLE_SIZE  = 20;
-	int x = 100;
-	int y = 100;
+	int x;
+	int y;
+	
+	public Apple(GameField field) {
+		x = (int) ((field.getWidth() - APPLE_SIZE) * Math.random());
+		y = (int) ((field.getHeight() - APPLE_SIZE) * Math.random());
+	}
 
 	@Override
 	public Area getArea() {

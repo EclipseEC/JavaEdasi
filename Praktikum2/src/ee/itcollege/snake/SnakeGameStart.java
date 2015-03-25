@@ -33,6 +33,7 @@ public class SnakeGameStart implements Runnable {
 			public void actionPerformed(ActionEvent e) {
 				Snake snake = game.getSnake();
 				snake.move();
+				game.checkCollisions();
 				game.repaint();
 			}
 		}); 

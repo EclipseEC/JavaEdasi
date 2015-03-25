@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JApplet;
 
+import ee.itcollege.snake.lib.CollisionDetector;
+
 /**
  * Applet for drawing gamefield
  */
@@ -15,7 +17,7 @@ import javax.swing.JApplet;
 public class GameField extends JApplet {
 
 	private Snake snake = new Snake();
-	private Apple apple = new Apple();
+	private Apple apple = null;
 	private Image buffer;
 
 	private Image getBuffer() {
@@ -44,12 +46,23 @@ public class GameField extends JApplet {
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
 
 		snake.drawItself(g2);
-		apple.drawItself(g2);
-
+		if (apple != null) {
+			apple.drawItself(g2);
+		}
 		g.drawImage(buffer, 0, 0, null);
 	}
 
 	public Snake getSnake() {
 		return snake;
+	}
+
+	public void checkCollisions() {
+		if (CollisionDetector.collide(snake.getHead(), apple)) {
+			apple = null;
+		}
+		
+		if (apple == null) {
+			apple = new Apple(this);
+		}
 	}
 }
