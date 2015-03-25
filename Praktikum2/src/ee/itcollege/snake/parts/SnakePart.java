@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Area;
 
 import ee.itcollege.snake.lib.IDrawable;
+import ee.itcollege.snake.lib.RandomColor;
 
 @SuppressWarnings("serial")
 public class SnakePart implements IDrawable {
@@ -13,6 +14,7 @@ public class SnakePart implements IDrawable {
     int x;
     int y;
     int size = 10;
+    Color color = new RandomColor();
     
     public SnakePart(int x, int y) {
         this.x = x;
@@ -22,7 +24,7 @@ public class SnakePart implements IDrawable {
     
     @Override
 	public void drawItself(Graphics2D g) {
-        g.setColor(Color.black);
+        g.setColor(color);
 	    g.fill(getArea());
     }
 
