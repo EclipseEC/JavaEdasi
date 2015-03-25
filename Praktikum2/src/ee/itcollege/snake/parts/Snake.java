@@ -66,10 +66,9 @@ public class Snake {
 	}
 
 	public void setDirection(Direction direction) {
-		if (this.directionOrder != null) {
-			return;
+		if (this.directionOrder == null) {
+			this.directionOrder = direction;
 		}
-		this.directionOrder = direction;
 	}
 
 }
