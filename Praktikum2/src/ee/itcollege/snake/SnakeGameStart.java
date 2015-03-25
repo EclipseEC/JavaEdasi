@@ -56,12 +56,13 @@ public class SnakeGameStart implements Runnable {
 				case KeyEvent.VK_UP:
 					direction = Direction.UP;
 					break;
+				case KeyEvent.VK_ESCAPE:
+					System.exit(0);
+					break;
 				}
 				if (null != direction) {
 					snake.setDirection(direction);
 				}
-				snake.move();
-				game.repaint();
 			}
 		});
 
