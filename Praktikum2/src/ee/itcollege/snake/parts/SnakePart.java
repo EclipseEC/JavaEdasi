@@ -7,6 +7,7 @@ import java.awt.geom.Area;
 
 import ee.itcollege.snake.lib.IDrawable;
 
+@SuppressWarnings("serial")
 public class SnakePart implements IDrawable {
 
     int x;
