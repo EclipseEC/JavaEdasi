@@ -30,6 +30,7 @@ public class Snake {
 			if (!direction.isOpposite(directionOrder)) {
 				direction = directionOrder;
 			}
+			this.directionOrder = null;
 		}
 		// move all the parts but the head
 		for (int i = parts.size() - 1; i >= 1; i--) {
