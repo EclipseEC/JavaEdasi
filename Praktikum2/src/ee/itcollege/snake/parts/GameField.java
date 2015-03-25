@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JApplet;
 
+import ee.itcollege.snake.level.Level1Field;
 import ee.itcollege.snake.lib.CollisionDetector;
 
 /**
@@ -20,19 +21,21 @@ public class GameField extends JApplet {
 	private Snake snake = new Snake();
 	private Image buffer;
 	private ArrayList<Apple> apples = new ArrayList<Apple>();
+	private Level1Field field = new Level1Field(this);
 
 	private Image getBuffer() {
-		if (null == buffer) {
+		if (null == buffer
+				|| buffer.getWidth(null) != getWidth()
+				|| buffer.getHeight(null) != getHeight()) {
 			// if there is no buffer object, create a new Image
-			buffer = new BufferedImage(getWidth(), getHeight(),
-					BufferedImage.TYPE_INT_ARGB);
+			buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		}
 		// fill the image with white
 		Graphics g = buffer.getGraphics();
-		g.setColor(Color.white);
-		g.fillRect(0, 0, getWidth(), getHeight());
-
-		return buffer;
+	    g.setColor(Color.white);
+	    g.fillRect(0, 0, getWidth(), getHeight());
+	    
+	    return buffer;
 	}
 
 	@Override
@@ -45,6 +48,7 @@ public class GameField extends JApplet {
 	public void paint(Graphics g) {
 		Image buffer = getBuffer();
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
+		field.drawItself(g2);
 
 		snake.drawItself(g2);
 		for (Apple apple : apples) {
@@ -59,6 +63,10 @@ public class GameField extends JApplet {
 	}
 
 	public void checkCollisions() {
+		if (CollisionDetector.collide(snake.getHead(), field)) {
+			System.exit(0);
+		}
+		
 		if (snake.collideWithItself()) {
 			System.exit(0);
 		}
