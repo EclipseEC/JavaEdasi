@@ -6,8 +6,9 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 import ee.itcollege.snake.lib.IDrawable;
+import ee.itcollege.snake.lib.IEdible;
 
-public class Apple implements IDrawable {
+public class Apple implements IDrawable, IEdible {
 
 	/**
 	 * 
@@ -31,6 +32,11 @@ public class Apple implements IDrawable {
 	public void drawItself(Graphics2D g) {
 		g.setColor(Color.red);
 		g.fill(getArea());
+	}
+
+	@Override
+	public int getCalories() {
+		return 10;
 	}
 
 }

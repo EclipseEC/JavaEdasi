@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import ee.itcollege.snake.lib.Direction;
+import ee.itcollege.snake.lib.IEdible;
 
 public class Snake {
 
@@ -63,6 +64,12 @@ public class Snake {
 
 	public Direction getDirection() {
 		return direction;
+	}
+	
+	public void eat(IEdible food) {
+		for (int i = 0; i < food.getCalories(); i++) {
+			parts.add(new SnakePart(-100, -100));
+		}
 	}
 
 	public void setDirection(Direction direction) {

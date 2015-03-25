@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JApplet;
 
@@ -19,6 +20,7 @@ public class GameField extends JApplet {
 	private Snake snake = new Snake();
 	private Apple apple = null;
 	private Image buffer;
+	private ArrayList<Apple> apples = new ArrayList<Apple>();
 
 	private Image getBuffer() {
 		if (null == buffer) {
@@ -46,10 +48,11 @@ public class GameField extends JApplet {
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
 
 		snake.drawItself(g2);
-		if (apple != null) {
-			apple.drawItself(g2);
-		}
-		g.drawImage(buffer, 0, 0, null);
+		for (Apple apple : apples) {
+        	apple.drawItself(g2);
+        }
+        
+        g.drawImage(buffer, 0, 0, null);
 	}
 
 	public Snake getSnake() {
@@ -57,12 +60,15 @@ public class GameField extends JApplet {
 	}
 
 	public void checkCollisions() {
-		if (CollisionDetector.collide(snake.getHead(), apple)) {
-			apple = null;
+		for (int i = 0; i < apples.size(); i++) {
+			if (CollisionDetector.collide(
+					snake.getHead(), apples.get(i))) {
+				snake.eat(apples.remove(i));
+			}
 		}
 		
-		if (apple == null) {
-			apple = new Apple(this);
-		}
+		if (apples.size() < 5) {
+        	apples.add(new Apple(this));
+        }
 	}
 }
