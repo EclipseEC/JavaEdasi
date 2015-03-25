@@ -25,11 +25,11 @@ public class SnakePart implements IDrawable {
     @Override
 	public void drawItself(Graphics2D g) {
         g.setColor(color);
-	    g.fill(getArea());
+	    g.fill(getCollisionArea());
     }
 
 	@Override
-	public Area getArea() {
+	public Area getCollisionArea() {
 		return new Area(new Rectangle(x, y, size, size));
 	}
 

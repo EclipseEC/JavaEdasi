@@ -10,10 +10,10 @@ public class CollisionDetector {
 			return false;
 		}
 		
-		Area thisArea = a1.getArea();
+		Area thisArea = a1.getCollisionArea();
 		Area substracted = new Area(thisArea);
 		
-		substracted.subtract(a2.getArea());
+		substracted.subtract(a2.getCollisionArea());
 		if (!thisArea.equals(substracted)) {
 			return true;
 		}

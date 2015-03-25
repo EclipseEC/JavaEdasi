@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -24,18 +25,18 @@ public class GameField extends JApplet {
 	private Level1Field field = new Level1Field(this);
 
 	private Image getBuffer() {
-		if (null == buffer
-				|| buffer.getWidth(null) != getWidth()
+		if (null == buffer || buffer.getWidth(null) != getWidth()
 				|| buffer.getHeight(null) != getHeight()) {
 			// if there is no buffer object, create a new Image
-			buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+			buffer = new BufferedImage(getWidth(), getHeight(),
+					BufferedImage.TYPE_INT_ARGB);
 		}
 		// fill the image with white
 		Graphics g = buffer.getGraphics();
-	    g.setColor(Color.white);
-	    g.fillRect(0, 0, getWidth(), getHeight());
-	    
-	    return buffer;
+		g.setColor(Color.white);
+		g.fillRect(0, 0, getWidth(), getHeight());
+
+		return buffer;
 	}
 
 	@Override
@@ -48,14 +49,16 @@ public class GameField extends JApplet {
 	public void paint(Graphics g) {
 		Image buffer = getBuffer();
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+				RenderingHints.VALUE_ANTIALIAS_ON);
 		field.drawItself(g2);
 
 		snake.drawItself(g2);
 		for (Apple apple : apples) {
-        	apple.drawItself(g2);
-        }
-        
-        g.drawImage(buffer, 0, 0, null);
+			apple.drawItself(g2);
+		}
+
+		g.drawImage(buffer, 0, 0, null);
 	}
 
 	public Snake getSnake() {
@@ -66,20 +69,28 @@ public class GameField extends JApplet {
 		if (CollisionDetector.collide(snake.getHead(), field)) {
 			System.exit(0);
 		}
-		
+
 		if (snake.collideWithItself()) {
 			System.exit(0);
 		}
-		
+
 		for (int i = 0; i < apples.size(); i++) {
-			if (CollisionDetector.collide(
-					snake.getHead(), apples.get(i))) {
+			if (CollisionDetector.collide(snake.getHead(), apples.get(i))) {
 				snake.eat(apples.remove(i));
 			}
 		}
-		
+
 		if (apples.size() < 5) {
-        	apples.add(new Apple(this));
-        }
+			apples.add(createNewApple());
+		}
+	}
+
+	private Apple createNewApple() {
+		Apple apple = new Apple(this);
+		while (CollisionDetector.collide(apple, field)
+				|| CollisionDetector.collide(apple, snake)) {
+			apple = new Apple(this);
+		}
+		return apple;
 	}
 }

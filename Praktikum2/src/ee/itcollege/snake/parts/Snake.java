@@ -1,13 +1,20 @@
 package ee.itcollege.snake.parts;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Area;
 import java.util.ArrayList;
 
 import ee.itcollege.snake.lib.CollisionDetector;
 import ee.itcollege.snake.lib.Direction;
+import ee.itcollege.snake.lib.IDrawable;
 import ee.itcollege.snake.lib.IEdible;
 
-public class Snake {
+public class Snake implements IDrawable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	ArrayList<SnakePart> parts = new ArrayList<SnakePart>();
 
@@ -19,6 +26,15 @@ public class Snake {
 			SnakePart part = new SnakePart(100, 100 + i * 10);
 			parts.add(part);
 		}
+	}
+	
+	@Override
+	public Area getCollisionArea() {
+		Area area = new Area();
+		for (SnakePart part : parts) {
+			area.add(part.getCollisionArea());
+		}
+		return area;
 	}
 
 	public void drawItself(Graphics2D g) {

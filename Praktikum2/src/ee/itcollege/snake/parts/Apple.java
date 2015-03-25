@@ -24,14 +24,14 @@ public class Apple implements IDrawable, IEdible {
 	}
 
 	@Override
-	public Area getArea() {
+	public Area getCollisionArea() {
 		return new Area(new Ellipse2D.Double(x, y, APPLE_SIZE, APPLE_SIZE));
 	}
 
 	@Override
 	public void drawItself(Graphics2D g) {
 		g.setColor(Color.red);
-		g.fill(getArea());
+		g.fill(getCollisionArea());
 	}
 
 	@Override
