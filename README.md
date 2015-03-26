@@ -17,3 +17,5 @@ Kindlasti võib juhtuda, et ei jõua koolituse käigus kõiki ülesandeid läbi 
   * [Päev 1](http://enos.itcollege.ee/~mimangus/edasi/day1)
 
   * [Päev 2](http://enos.itcollege.ee/~mimangus/edasi/day2)
+ 
+  * [Päev 3](http://enos.itcollege.ee/~mimangus/edasi/day3) 
