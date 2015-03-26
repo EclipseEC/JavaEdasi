@@ -23,5 +23,12 @@ public class PersonServiceImpl implements PersonService {
     public Person save(Person p) {
         return personDao.persist(p);
     }
-    
+
+    @Override
+    @Transactional
+    public void delete(long personID) {
+    	Person person = personDao.getById(personID);
+        personDao.delete(person);
+    }
+
 }
