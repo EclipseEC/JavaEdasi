@@ -30,5 +30,6 @@ public class WicketApplication extends WebApplication
 
 		// add your configuration here
 		mountPage("first", FirstPage.class);
+		mountPage("second", SecondPage.class);
 	}
 }
