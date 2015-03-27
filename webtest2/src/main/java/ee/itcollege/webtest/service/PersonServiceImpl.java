@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import ee.itcollege.webtest.annotations.LogUsage;
 import ee.itcollege.webtest.dao.PersonDao;
 import ee.itcollege.webtest.entity.Person;
 
@@ -18,6 +19,7 @@ public class PersonServiceImpl implements PersonService {
         return personDao.getAll();
     }
     
+    @LogUsage("tere")
     @Override
     @Transactional
     public Person save(Person p) {
